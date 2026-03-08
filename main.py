@@ -1,11 +1,38 @@
 import json
+import openpyxl
 with open("test_data.json", "r") as file:
     chemistry_data = json.load(file)
+workbook = openpyxl.load_workbook("heatlog_test.xlsx")
+sheet = workbook.active
+print(sheet["B1"].value)
+print(chemistry_data["2610410"]["P1"]["C"])
+column_map = {
+                      "C": "B",
+                      "Mn": "C",
+                      "P": "D",
+                      "S": "E",
+                      "Si": "F",
+                      "Ni": "G",
+                      "Cr": "H",
+                      "Mo": "I",
+                      "Cu": "J"
+                 } 
+row_map = {
+                      "P1": 2,
+                      "P2": 3,
+                      "P3": 4,
+                      "P4": 5,
+                      "P5": 6
+                 }
 for heat in chemistry_data:
-        print([heat])
         for sample in chemistry_data[heat]:
-            print([sample])
             for element in chemistry_data[heat][sample]:
-                 print(chemistry_data[heat][sample][element])
+                 column = column_map[element]
+                 row = row_map[sample]
+                 cell = column + str(row)
+                 value = chemistry_data[heat][sample][element]
+                 sheet[cell] = value
+workbook.save("heatlog_test.xlsx")
+# Mapping - Element = columns samples = rows
 #main quest get test_data into an excel spreadsheet 
 #side quest - use nested dictionaries to find the value of each samples chemistry
