@@ -50,7 +50,10 @@ for sample in chemistry_data[heat]:
         sheet[cell] = value
 workbook.save("heatlog_test.xlsx")
 print("Heatlog Complete")
+#heatlog Automation V1
+#waits for a minimum of 3 chemistry samples (P1, P2, P3) 
+#once detected, writes chemistry values inti heatlog excel template
+#uses retry system to reload data until the 3 samples are taken
+#main quest get test_data into the actual heatlog excel and change mapping according to actual heatlog 
+#actual time retrys for the real data 10 minute retrys before "P1" and 5 minute checks after "P2"
 # Mapping - Element = columns samples = rows
-#main quest get test_data into the actual heatlog excel and change mapping according to new sheet 
-#side quest - add time variations to continually check for samples until we reach our desired 3 sample minumum
-#ex 10 minute retrys before "P1" and 5 minute checks after "P2"
